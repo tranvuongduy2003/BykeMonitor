@@ -49,3 +49,62 @@ Each service will be responsible for a specific domain, making the system modula
 ### Key Functions:
 - Generate real-time reports for admins (e.g., peak check-in times, popular locations)
 - Provide audit logs of check-ins/check-outs
+# 2. Core Entities
+Each service will manage a set of entities (data models) that represent the core data objects in your system.
+## A. User Entity
+### Attributes:
+- UserId: Unique identifier for the user
+- Username: User's login name
+- Password: (hashed) user password
+- Role: Role of the user (admin, operator, customer)
+- FullName: User's full name
+- Email: Contact email
+- Phone: Contact phone number
+- SessionToken: Token for user sessions (for authentication)
+## B. Motorbike Entity
+### Attributes:
+- BikeId: Unique identifier for the motorbike
+- LicensePlate: License plate number
+- OwnerId: Reference to the UserId of the motorbike owner
+- Model: Motorbike model
+- Status: Current status (checked-in, checked-out, parked)
+- CheckInTime: Timestamp of last check-in
+- CheckOutTime: Timestamp of last check-out
+- LocationId: Reference to the location/parking spot where it's checked in
+## C. ParkingSpot Entity
+### Attributes:
+- SpotId: Unique identifier for the parking spot
+- LocationId: Geographical identifier (or lot identifier) for where the parking spot is
+- IsAvailable: Boolean indicating if the spot is available
+- BikeId: Reference to the motorbike currently occupying the spot (null if empty)
+- SpotType: Type of parking spot (e.g., regular, premium)
+## D. CheckInOutLog Entity
+### Attributes:
+- LogId: Unique identifier for the log entry
+- UserId: Reference to the UserId who performed the check-in/out
+- BikeId: Reference to the motorbike being checked in/out
+- CheckInTime: Timestamp of check-in
+- CheckOutTime: Timestamp of check-out
+- SpotId: Reference to the parking spot used
+- Duration: Duration of stay (calculated at check-out)
+- Charge: Cost associated with the duration of stay (optional)
+## E. Location Entity
+### Attributes:
+- LocationId: Unique identifier for the parking location
+- Address: Full address or coordinates of the location
+- Capacity: Total number of parking spots at the location
+- AvailableSpots: Current number of available spots
+## F. Payment Entity (optional)
+### Attributes:
+- PaymentId: Unique identifier for the payment
+- UserId: Reference to the user making the payment
+- Amount: Payment amount
+- PaymentMethod: Payment method used
+- Timestamp: Time of payment transaction
+## G. NotificationLog Entity
+### Attributes:
+- NotificationId: Unique identifier for the notification
+- UserId: Reference to the recipient user
+- Message: Content of the notification
+- Type: Notification type (email, SMS, push)
+- Timestamp: Time the notification was sent
