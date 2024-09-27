@@ -7,6 +7,9 @@ Each service will be responsible for a specific domain, making the system modula
 - User registration and login
 - Retrieve user profile and session details
 - Handle user roles (e.g., admin, operator, user)
+### Entities: 
+- User Entity
+- NotificationLog Entity
 ## B. Motorbike Service
 ### Responsibilities: 
 - Manage motorbike information, including registration, status updates (checked in or out), and tracking.
@@ -14,6 +17,8 @@ Each service will be responsible for a specific domain, making the system modula
 - Register motorbikes in the system
 - Update motorbike status (available, in-use, parked)
 - Retrieve motorbike data
+### Entities:
+- Motorbike Entity
 ## C. Parking Service
 ### Responsibilities: 
 - Manage parking spots, their availability, and location data.
@@ -21,6 +26,9 @@ Each service will be responsible for a specific domain, making the system modula
 - Allocate or release parking spots during check-in/check-out
 - Track parking spot availability in real time
 - Associate parking spots with locations (geographical coordinates)
+### Entities:
+- ParkingSpot Entity
+- Location Entity
 ## D. Check-In/Check-Out Service
 ### Responsibilities: 
 - Handle the core business logic of motorbike check-ins and check-outs, including validation, time logging, and charging (if applicable).
@@ -29,6 +37,10 @@ Each service will be responsible for a specific domain, making the system modula
 - Motorbike check-out process (spot release, timing, and logging)
 - Validate user and motorbike information before check-in/out
 - Time tracking for each motorbike in/out event
+### Entities:
+- CheckInOutLog Entity
+- Motorbike Entity
+- ParkingSpot Entity
 ## E. Notification Service
 ### Responsibilities: 
 - Send real-time notifications to users or administrators about status updates (e.g., motorbike checked in/out, available spots, alerts).
@@ -36,6 +48,8 @@ Each service will be responsible for a specific domain, making the system modula
 - Notify users of successful check-in/check-out
 - Send alerts for anomalies (e.g., system overload, motorbike not found)
 - Handle async notifications via email, SMS, or push notifications
+### Entities:
+- NotificationLog Entity
 ## F. Payment Service (optional, if billing is required)
 ### Responsibilities: 
 - Manage payments for parking services, including billing and invoicing.
@@ -43,12 +57,21 @@ Each service will be responsible for a specific domain, making the system modula
 - Calculate parking charges based on duration
 - Process payments via different methods (credit card, mobile payment, etc.)
 - Issue invoices to users
+### Entities:
+- Payment Entity
+- CheckInOutLog Entity
 ## G. Reporting & Analytics Service
 ### Responsibilities: 
 - Provide insights and reports based on system usage (e.g., daily check-ins, occupancy rate).
 ### Key Functions:
 - Generate real-time reports for admins (e.g., peak check-in times, popular locations)
 - Provide audit logs of check-ins/check-outs
+### Entities:
+Aggregates data from:
+- CheckInOutLog Entity
+- User Entity
+- ParkingSpot Entity
+- Location Entity
 # 2. Core Entities
 Each service will manage a set of entities (data models) that represent the core data objects in your system.
 ## A. User Entity
